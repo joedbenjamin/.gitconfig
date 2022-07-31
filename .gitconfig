@@ -1,0 +1,44 @@
+[alias]
+  g="!git"
+  a = add
+  aliases = "!git config -l | awk -F \".\" ' { print $2 } ' | less"
+  br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+  del = branch -D
+  co = checkout
+  cob = checkout -b
+  curr = "rev-parse --abbrev-ref HEAD"
+  d = diff -w
+  enforce = push --force-with-lease
+  files = "!f() { git diff --name-status \"$1\" \"$2\"; }; f"
+  rl = reflog
+  rrl = "!f() { git reset HEAD@\"{$1}\"; }; f"
+  s = status -s
+
+  # commits
+  acan = "!git add .; git commit --amend --no-edit"
+  c = commit
+  ca = commit --amend
+  can = commit --amend --no-edit
+
+  # logs -- case insensitive search
+  l = log -i  --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(green)(%ci | %cr) %Creset%Cblue[%an]\"
+  lf = log -i --name-status
+  lo = log -i --pretty=oneline
+  ls = log -i --stat
+  sl = shortlog -i
+
+  # rebasing
+  rb = rebase
+  rbi = "!f() { git rebase -i HEAD~\"$1\"; }; f"
+  rbs = rebase --skip
+  rba = rebase --abort
+  rbc = rebase --continue
+
+[diff]
+  colorMoved = zebra
+
+[pull]
+  rebase = true
+
+[push]
+  default = upstream
